@@ -3,7 +3,7 @@ import SearchOrder from "../features/order/SearchOrder";
 
 export default function Header(){
     return <div>
-        <header>
+        <header className="bg-rose-500">
             <Link to="/">Fast Pizza</Link>
             <SearchOrder/>
             <p>Sahadat</p>
