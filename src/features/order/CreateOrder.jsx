@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
+import Button from "../../ui/Button";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -41,32 +42,41 @@ function CreateOrder() {
   const cart = fakeCart;
   const formErrors = useActionData()
   return (
-    <div>
-      <h2>Ready to order? Let's go!</h2>
+    <div className="p-4">
+      <h2 className="text-2xl font-semibold mb-2">Ready to order? Let's go!</h2>
 
       <Form method="POST">
-        <div>
-          <label>First Name</label>
-          <input type="text" name="customer" required />
-        </div>
-
-        <div>
-          <label>Phone number</label>
-          <div>
-            <input type="tel" name="phone" required />
-          </div>
-          {formErrors?.phone && <p>{formErrors.phone}</p>}
-        </div>
-
-        <div>
-          <label>Address</label>
-          <div>
-            <input type="text" name="address" required />
+        <div className="form-input-wrapper">
+          <label className="mr-2 sm:basis-40">First Name</label>
+          <div className="grow">
+            <input
+            className="input w-full"
+            type="text" name="customer" required />
           </div>
         </div>
 
-        <div>
+        <div className="form-input-wrapper">
+          <label className="mr-2 sm:basis-40">Phone number</label>
+          <div className="grow">
+            <input
+            className="input w-full"
+            type="tel" name="phone" required />
+            {formErrors?.phone && <p className="text-xs pl-2 mt-2 text-red-600">{formErrors.phone}</p>}
+          </div>
+        </div>
+
+        <div className="form-input-wrapper">
+          <label className="mr-2 sm:basis-40">Address</label>
+          <div className="grow">
+            <input
+            className="input w-full"
+             type="text" name="address" required />
+          </div>
+        </div>
+
+        <div className="my-4 flex gap-4 items-center">
           <input
+          className="h-6 w-6 accent-yellow-400 mr-2 rounded-full focus:outline-none focus:ring-1 focus:ring-yellow-500 hover:ring-2 hover:ring-yellow-400"
             type="checkbox"
             name="priority"
             id="priority"
@@ -76,8 +86,11 @@ function CreateOrder() {
           <label htmlFor="priority">Want to yo give your order priority?</label>
         </div>
         <input type="hidden" value={JSON.stringify(cart)} name="cart"/>
-        <div>
-          <button disabled={isSubmitting}>{isSubmitting ? 'Placing order...' : 'Order now'}</button>
+        <div className="flex sm:justify-center">
+          <Button
+          >
+            {isSubmitting ? 'Placing order...' : 'Order now'}
+           </Button>
         </div>
       </Form>
     </div>
